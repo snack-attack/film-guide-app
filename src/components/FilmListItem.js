@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 
 const FilmListItem = ({ film }) => (
   <View style={styles.container}>
-    <Text>{film.name}</Text>
+    <Text style={styles.title}>{film.name}</Text>
   </View>
 );
 
@@ -11,7 +11,10 @@ export default FilmListItem;
 
 const styles = StyleSheet.create({
   container: {
-    height: 30,
-    justifyContent: 'center'
+    padding: 12,
+    backgroundColor: '#fff'
+  },
+  title: {
+    fontSize: 16
   }
 });

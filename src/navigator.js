@@ -11,6 +11,9 @@ export default StackNavigator(
     Detail: { screen: DetailScreen }
   },
   {
+    cardStyle: {
+      backgroundColor: '#fff'
+    },
     navigationOptions: {
       headerStyle: {
         marginTop: Platform.OS === 'android' ? Constants.statusBarHeight : 0
