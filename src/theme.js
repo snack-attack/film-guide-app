@@ -6,6 +6,8 @@ const platform = {
 };
 
 const colors = {
+  primary: '#68aa63',
+
   // http://chir.ag/projects/name-that-color/
   white: '#fff',
   concrete: '#f2f2f2',

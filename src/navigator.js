@@ -16,8 +16,10 @@ export default StackNavigator(
     },
     navigationOptions: {
       headerStyle: {
-        marginTop: platform.isAndroid ? Constants.statusBarHeight : 0
-      }
+        marginTop: platform.isAndroid ? Constants.statusBarHeight : 0,
+        backgroundColor: colors.primary
+      },
+      headerTintColor: colors.white
     }
   }
 );
