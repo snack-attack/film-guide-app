@@ -1,9 +1,12 @@
 import { Constants } from 'expo';
+import { Platform, StatusBar } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import ListScreen from './screens/ListScreen';
 import DetailScreen from './screens/DetailScreen';
-import { colors, platform } from './theme';
+import { colors } from './theme';
+
+StatusBar.setBarStyle('light-content');
 
 export default StackNavigator(
   {
@@ -16,8 +19,13 @@ export default StackNavigator(
     },
     navigationOptions: {
       headerStyle: {
-        marginTop: platform.isAndroid ? Constants.statusBarHeight : 0,
-        backgroundColor: colors.primary
+        backgroundColor: colors.primary,
+        ...Platform.select({
+          android: {
+            paddingTop: Constants.statusBarHeight,
+            height: Constants.statusBarHeight + 56
+          }
+        })
       },
       headerTintColor: colors.white
     }
