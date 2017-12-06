@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
+
+import FilmListItem from './FilmListItem';
 
 export default class FilmList extends Component {
   keyExtractor(item) {
@@ -7,7 +9,7 @@ export default class FilmList extends Component {
   }
 
   renderItem({ item }) {
-    return <Text>{item.name}</Text>;
+    return <FilmListItem film={item} />;
   }
 
   render() {
