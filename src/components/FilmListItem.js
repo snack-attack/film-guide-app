@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Platform } from 'react-native';
+
+const isIOS = Platform.OS === 'ios';
 
 const FilmListItem = ({ film }) => (
   <View style={styles.container}>
@@ -10,6 +12,7 @@ const FilmListItem = ({ film }) => (
       </Text>
     </View>
     {!!film.tmdbRating && <Text style={styles.rating}>{film.tmdbRating}%</Text>}
+    {isIOS && <Text style={styles.accessory}>{'>'}</Text>}
   </View>
 );
 
@@ -36,5 +39,11 @@ const styles = StyleSheet.create({
   rating: {
     fontSize: 16,
     paddingLeft: 6
+  },
+  accessory: {
+    paddingLeft: 12,
+    fontSize: 16,
+    color: '#c0c0c0',
+    alignSelf: 'center'
   }
 });
