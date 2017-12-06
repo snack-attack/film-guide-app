@@ -12,6 +12,7 @@ const colors = {
   white: '#fff',
   concrete: '#f2f2f2',
   silver: '#c0c0c0',
+  dove: '#6c6c6c',
   emperor: '#555'
 };
 

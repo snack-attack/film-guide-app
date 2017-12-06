@@ -10,7 +10,9 @@ export default class FilmList extends Component {
   }
 
   renderItem({ item }) {
-    return <FilmListItem film={item} />;
+    return (
+      <FilmListItem film={item} onFilmSelected={film => console.log(film)} />
+    );
   }
 
   render() {

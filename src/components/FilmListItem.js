@@ -1,24 +1,42 @@
-import React from 'react';
-import { View, Text, StyleSheet, Platform } from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, TouchableHighlight, StyleSheet, Platform } from 'react-native';
 import Icon from '@expo/vector-icons/Ionicons';
 import { colors, dimensions, fontSizes } from '../theme';
 
 const isIOS = Platform.OS === 'ios';
 
-const FilmListItem = ({ film }) => (
-  <View style={styles.container}>
-    <View style={styles.titleContainer}>
-      <Text style={styles.title} numberOfLines={1} ellipsizeMode={'tail'}>
-        {film.name}
-      </Text>
-      <Text style={styles.showtime} numberOfLines={1} ellipsizeMode={'tail'}>
-        {film.showtimes[0].startsAtDate} at {film.showtimes[0].startsAtTime} on {film.showtimes[0].channel}
-      </Text>
-    </View>
-    {!!film.tmdbRating && <Text style={styles.rating}>{film.tmdbRating}%</Text>}
-    {isIOS && <Icon style={styles.accessory} name="ios-arrow-forward" />}
-  </View>
-);
+class FilmListItem extends Component {
+  constructor() {
+    super();
+
+    this.handlePress = this.handlePress.bind(this);
+  }
+
+  handlePress() {
+    const { film, onFilmSelected } = this.props;
+    onFilmSelected(film);
+  }
+
+  render() {
+    const { film } = this.props;
+    return (
+      <TouchableHighlight underlayColor={colors.dove} onPress={this.handlePress}>
+        <View style={styles.container}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title} numberOfLines={1} ellipsizeMode={'tail'}>
+              {film.name}
+            </Text>
+            <Text style={styles.showtime} numberOfLines={1} ellipsizeMode={'tail'}>
+              {film.showtimes[0].startsAtDate} at {film.showtimes[0].startsAtTime} on {film.showtimes[0].channel}
+            </Text>
+          </View>
+          {!!film.tmdbRating && <Text style={styles.rating}>{film.tmdbRating}%</Text>}
+          {isIOS && <Icon style={styles.accessory} name="ios-arrow-forward" />}
+        </View>
+      </TouchableHighlight>
+    );
+  }
+}
 
 export default FilmListItem;
 
