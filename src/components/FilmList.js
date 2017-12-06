@@ -5,14 +5,19 @@ import FilmListItem from './FilmListItem';
 import FilmListItemSeparator from './FilmListItemSeparator';
 
 export default class FilmList extends Component {
+  constructor() {
+    super();
+
+    this.renderItem = this.renderItem.bind(this);
+  }
+
   keyExtractor(item) {
     return item.id;
   }
 
   renderItem({ item }) {
-    return (
-      <FilmListItem film={item} onFilmSelected={film => console.log(film)} />
-    );
+    const { onFilmSelected } = this.props;
+    return <FilmListItem film={item} onFilmSelected={onFilmSelected} />;
   }
 
   render() {

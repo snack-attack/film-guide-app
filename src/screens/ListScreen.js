@@ -14,13 +14,15 @@ export default class ListScreen extends Component {
     this.navigateToDetailScreen = this.navigateToDetailScreen.bind(this);
   }
 
-  navigateToDetailScreen() {
+  navigateToDetailScreen(film) {
     this.props.navigation.navigate('Detail', {
-      title: 'Blues Brothers'
+      title: film.name
     });
   }
 
   render() {
-    return <FilmList films={films} />;
+    return (
+      <FilmList films={films} onFilmSelected={this.navigateToDetailScreen} />
+    );
   }
 }
