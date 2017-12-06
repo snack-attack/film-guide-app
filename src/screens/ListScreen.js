@@ -13,7 +13,9 @@ export default class ListScreen extends Component {
   }
 
   navigateToDetailScreen() {
-    this.props.navigation.navigate('Detail');
+    this.props.navigation.navigate('Detail', {
+      title: 'Blues Brothers'
+    });
   }
 
   render() {

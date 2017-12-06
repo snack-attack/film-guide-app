@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 export default class DetailScreen extends Component {
+  static navigationOptions = ({ navigation }) => {
+    const { title } = navigation.state.params;
+    return {
+      title
+    };
+  };
+
   render() {
     return (
       <View style={styles.container}>
