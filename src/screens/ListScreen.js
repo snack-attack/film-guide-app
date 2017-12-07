@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getFilmsSelector } from '../store/films';
+import { getFilmsSelector, getFilmsFetchingSelector } from '../store/films';
 import FilmList from '../components/FilmList';
+import FilmsLoading from '../components/FilmsLoading';
 
 class ListScreen extends Component {
   static navigationOptions = {
@@ -22,13 +23,18 @@ class ListScreen extends Component {
   }
 
   render() {
-    const { films } = this.props;
+    const { films, isFetching } = this.props;
+    if (isFetching) {
+      return <FilmsLoading />;
+    }
+
     return <FilmList films={films} onFilmSelected={this.navigateToDetailScreen} />;
   }
 }
 
 const mapStateToProps = state => ({
-  films: getFilmsSelector(state)
+  films: getFilmsSelector(state),
+  isFetching: getFilmsFetchingSelector(state)
 });
 
 export default connect(mapStateToProps)(ListScreen);
