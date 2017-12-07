@@ -8,7 +8,7 @@ const FilmDetail = ({ film }) => (
   <View style={styles.container}>
     <View style={styles.statsContainer}>
       {!!film.year && <Text style={styles.stats}>Released in {film.year}</Text>}
-      {!!film.tmdbRating && <Text style={[styles.stats, styles.rating]}>Rating: {film.tmdbRating}%</Text>}
+      {!!film.tmdbRating && <Text style={styles.stats}>Rating: {film.tmdbRating}%</Text>}
     </View>
     <Text style={styles.synopsis}>{film.synopsis}</Text>
   </View>
@@ -23,16 +23,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: GUTTER * 2
   },
   statsContainer: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   stats: {
     fontSize: fontSizes.normal,
     lineHeight: lineHeights.normal,
-    paddingVertical: GUTTER,
-    flex: 1
-  },
-  rating: {
-    textAlign: 'right'
+    paddingVertical: GUTTER
   },
   synopsis: {
     fontSize: fontSizes.small,
