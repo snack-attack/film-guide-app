@@ -16,7 +16,7 @@ export default class ListScreen extends Component {
 
   navigateToDetailScreen(film) {
     this.props.navigation.navigate('Detail', {
-      title: film.name
+      film
     });
   }
 

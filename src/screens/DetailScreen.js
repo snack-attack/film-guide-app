@@ -1,29 +1,17 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { colors } from '../theme';
+
+import FilmDetail from '../components/FilmDetail';
 
 export default class DetailScreen extends Component {
   static navigationOptions = ({ navigation }) => {
-    const { title } = navigation.state.params;
+    const { name } = navigation.state.params.film;
     return {
-      title
+      title: name
     };
   };
 
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Welcome to the Detail Screen</Text>
-      </View>
-    );
+    const { film } = this.props.navigation.state.params;
+    return <FilmDetail film={film} />;
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.white,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
