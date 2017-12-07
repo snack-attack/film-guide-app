@@ -6,7 +6,7 @@ const GUTTER = dimensions.basePadding / 2;
 
 const FilmDetail = ({ film }) => (
   <View style={styles.container}>
-    <ScrollView>
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.statsContainer}>
         {!!film.year && <Text style={styles.stats}>Released in {film.year}</Text>}
         {!!film.tmdbRating && <Text style={styles.stats}>Rating: {film.tmdbRating}%</Text>}
@@ -29,7 +29,9 @@ export default FilmDetail;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
+  },
+  scrollContainer: {
     paddingVertical: GUTTER,
     paddingHorizontal: GUTTER * 2
   },
