@@ -6,27 +6,31 @@ const GUTTER = dimensions.basePadding / 2;
 
 const FilmDetail = ({ film }) => (
   <View style={styles.container}>
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
-      <Image
-        style={styles.image}
-        source={{
-          uri: `https://image.tmdb.org/t/p/original/${film.tmdbImageId}.jpg`
-        }}
-      />
-      <View style={styles.statsContainer}>
-        {!!film.year && <Text style={styles.stats}>Released in {film.year}</Text>}
-        {!!film.tmdbRating && <Text style={styles.stats}>Rating: {film.tmdbRating}%</Text>}
+    <ScrollView>
+      {!!film.tmdbImageId && (
+        <Image
+          style={styles.image}
+          source={{
+            uri: `https://image.tmdb.org/t/p/original/${film.tmdbImageId}.jpg`
+          }}
+        />
+      )}
+      <View style={styles.textContainer}>
+        <View style={styles.statsContainer}>
+          {!!film.year && <Text style={styles.stats}>Released in {film.year}</Text>}
+          {!!film.tmdbRating && <Text style={styles.stats}>Rating: {film.tmdbRating}%</Text>}
+        </View>
+        <View style={styles.showtimesContainer}>
+          <Text style={styles.showtimesHeader}>Showtimes:</Text>
+          {film.showtimes.map((showtime, idx) => (
+            <Text style={styles.showtime} key={idx}>
+              {showtime.startsAtDate} at {showtime.startsAtTime} on {showtime.channel}
+            </Text>
+          ))}
+        </View>
+        <View style={styles.separator} />
+        <Text style={styles.synopsis}>{film.synopsis}</Text>
       </View>
-      <View style={styles.showtimesContainer}>
-        <Text style={styles.showtimesHeader}>Showtimes:</Text>
-        {film.showtimes.map((showtime, idx) => (
-          <Text style={styles.showtime} key={idx}>
-            {showtime.startsAtDate} at {showtime.startsAtTime} on {showtime.channel}
-          </Text>
-        ))}
-      </View>
-      <View style={styles.separator} />
-      <Text style={styles.synopsis}>{film.synopsis}</Text>
     </ScrollView>
   </View>
 );
@@ -37,18 +41,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  scrollContainer: {
+  textContainer: {
     paddingVertical: GUTTER,
     paddingHorizontal: GUTTER * 2
   },
   image: {
     aspectRatio: 0.75,
-    resizeMode: 'cover'
+    resizeMode: 'cover',
+    paddingBottom: GUTTER
   },
   statsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingTop: dimensions.basePadding
+    justifyContent: 'space-between'
   },
   stats: {
     fontSize: fontSizes.normal,
