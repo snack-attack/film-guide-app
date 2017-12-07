@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { getFilmsSelector } from '../store/films';
 import FilmList from '../components/FilmList';
 
 class ListScreen extends Component {
@@ -27,7 +28,7 @@ class ListScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  films: state.films.collection
+  films: getFilmsSelector(state)
 });
 
 export default connect(mapStateToProps)(ListScreen);
