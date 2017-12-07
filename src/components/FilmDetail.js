@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
 import { dimensions, fontSizes, lineHeights, colors } from '../theme';
 
 const GUTTER = dimensions.basePadding / 2;
@@ -7,6 +7,12 @@ const GUTTER = dimensions.basePadding / 2;
 const FilmDetail = ({ film }) => (
   <View style={styles.container}>
     <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <Image
+        style={styles.image}
+        source={{
+          uri: `https://image.tmdb.org/t/p/original/${film.tmdbImageId}.jpg`
+        }}
+      />
       <View style={styles.statsContainer}>
         {!!film.year && <Text style={styles.stats}>Released in {film.year}</Text>}
         {!!film.tmdbRating && <Text style={styles.stats}>Rating: {film.tmdbRating}%</Text>}
@@ -35,9 +41,14 @@ const styles = StyleSheet.create({
     paddingVertical: GUTTER,
     paddingHorizontal: GUTTER * 2
   },
+  image: {
+    aspectRatio: 0.75,
+    resizeMode: 'cover'
+  },
   statsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    paddingTop: dimensions.basePadding
   },
   stats: {
     fontSize: fontSizes.normal,
