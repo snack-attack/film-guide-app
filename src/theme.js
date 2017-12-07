@@ -26,7 +26,8 @@ const fontSizes = {
 };
 
 const lineHeights = {
-  small: platform.isAndroid ? 22 : 18
+  small: platform.isAndroid ? 22 : 18,
+  normal: platform.isAndroid ? 24 : 20
 };
 
 export { colors, dimensions, fontSizes, lineHeights, platform };
