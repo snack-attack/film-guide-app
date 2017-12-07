@@ -1,4 +1,4 @@
-import films from '../data/films.json';
+import { getAllFilms } from '../data/api';
 
 const types = {
   FETCH_FILMS: '[Films] Fetch'
@@ -19,7 +19,7 @@ function reducer(state = initialState, action) {
     case types.FETCH_FILMS:
       return {
         ...state,
-        collection: films
+        collection: getAllFilms()
       };
 
     default:
