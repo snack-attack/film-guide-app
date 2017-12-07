@@ -1,6 +1,7 @@
 import React from 'react';
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
 import Navigator from './src/navigator';
 import filmsReducer, { actionCreators as filmsActionCreators } from './src/store/films';
@@ -9,7 +10,7 @@ const reducers = combineReducers({
   films: filmsReducer
 });
 
-const store = createStore(reducers);
+const store = createStore(reducers, applyMiddleware(thunk));
 
 store.dispatch(filmsActionCreators.fetchFilms());
 

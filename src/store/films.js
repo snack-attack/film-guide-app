@@ -1,13 +1,20 @@
 import { getAllFilms } from '../data/api';
 
 const types = {
-  FETCH_FILMS: '[Films] Fetch'
+  FETCH_FILMS_SUCCESS: '[Films] Fetch Success'
 };
 
+const fetchFilmsSuccess = films => ({
+  type: types.FETCH_FILMS_SUCCESS,
+  payload: films
+});
+
 const actionCreators = {
-  fetchFilms: () => ({
-    type: types.FETCH_FILMS
-  })
+  fetchFilms: () => dispatch => {
+    getAllFilms().then(films => {
+      dispatch(fetchFilmsSuccess(films));
+    });
+  }
 };
 
 const initialState = {
@@ -16,10 +23,10 @@ const initialState = {
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case types.FETCH_FILMS:
+    case types.FETCH_FILMS_SUCCESS:
       return {
         ...state,
-        collection: getAllFilms()
+        collection: action.payload
       };
 
     default:
