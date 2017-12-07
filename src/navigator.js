@@ -1,9 +1,9 @@
 import { Constants } from 'expo';
-import { Platform } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
 import ListScreen from './screens/ListScreen';
 import DetailScreen from './screens/DetailScreen';
+import { colors, platform } from './theme';
 
 export default StackNavigator(
   {
@@ -12,11 +12,11 @@ export default StackNavigator(
   },
   {
     cardStyle: {
-      backgroundColor: '#fff'
+      backgroundColor: colors.white
     },
     navigationOptions: {
       headerStyle: {
-        marginTop: Platform.OS === 'android' ? Constants.statusBarHeight : 0
+        marginTop: platform.isAndroid ? Constants.statusBarHeight : 0
       }
     }
   }

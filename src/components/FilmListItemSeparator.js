@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import { dimensions, colors } from '../theme';
 
 const FilmListItemSeparator = () => <View style={styles.container} />;
 
@@ -7,8 +8,8 @@ export default FilmListItemSeparator;
 
 const styles = StyleSheet.create({
   container: {
-    marginLeft: 12,
+    marginLeft: dimensions.basePadding,
     height: 1,
-    backgroundColor: '#f2f2f2'
+    backgroundColor: colors.concrete
   }
 });

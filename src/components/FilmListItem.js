@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Platform } from 'react-native';
 import Icon from '@expo/vector-icons/Ionicons';
+import { colors, dimensions, fontSizes } from '../theme';
 
 const isIOS = Platform.OS === 'ios';
 
@@ -23,8 +24,8 @@ export default FilmListItem;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 12,
-    backgroundColor: '#fff',
+    padding: dimensions.basePadding,
+    backgroundColor: colors.white,
     flexDirection: 'row',
     alignItems: 'center'
   },
@@ -32,22 +33,21 @@ const styles = StyleSheet.create({
     flex: 1
   },
   title: {
-    fontSize: 16
+    fontSize: fontSizes.normal
   },
   showtime: {
-    fontSize: 14,
-    paddingTop: 3,
-    color: '#555'
+    fontSize: fontSizes.small,
+    paddingTop: dimensions.basePadding / 4,
+    color: colors.emperor
   },
   rating: {
-    fontSize: 16,
-    paddingLeft: 6
+    fontSize: fontSizes.normal,
+    paddingLeft: dimensions.basePadding / 2
   },
   accessory: {
-    paddingLeft: 12,
-    fontSize: 16,
-    color: '#c0c0c0',
-    alignSelf: 'center',
+    paddingLeft: dimensions.basePadding,
+    fontSize: fontSizes.normal,
+    color: colors.silver,
     paddingTop: 2
   }
 });
