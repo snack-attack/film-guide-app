@@ -1,25 +1,27 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { dimensions, fontSizes, lineHeights, colors } from '../theme';
 
 const GUTTER = dimensions.basePadding / 2;
 
 const FilmDetail = ({ film }) => (
   <View style={styles.container}>
-    <View style={styles.statsContainer}>
-      {!!film.year && <Text style={styles.stats}>Released in {film.year}</Text>}
-      {!!film.tmdbRating && <Text style={styles.stats}>Rating: {film.tmdbRating}%</Text>}
-    </View>
-    <View style={styles.showtimesContainer}>
-      <Text style={styles.showtimesHeader}>Showtimes:</Text>
-      {film.showtimes.map((showtime, idx) => (
-        <Text style={styles.showtime} key={idx}>
-          {showtime.startsAtDate} at {showtime.startsAtTime} on {showtime.channel}
-        </Text>
-      ))}
-    </View>
-    <View style={styles.separator} />
-    <Text style={styles.synopsis}>{film.synopsis}</Text>
+    <ScrollView>
+      <View style={styles.statsContainer}>
+        {!!film.year && <Text style={styles.stats}>Released in {film.year}</Text>}
+        {!!film.tmdbRating && <Text style={styles.stats}>Rating: {film.tmdbRating}%</Text>}
+      </View>
+      <View style={styles.showtimesContainer}>
+        <Text style={styles.showtimesHeader}>Showtimes:</Text>
+        {film.showtimes.map((showtime, idx) => (
+          <Text style={styles.showtime} key={idx}>
+            {showtime.startsAtDate} at {showtime.startsAtTime} on {showtime.channel}
+          </Text>
+        ))}
+      </View>
+      <View style={styles.separator} />
+      <Text style={styles.synopsis}>{film.synopsis}</Text>
+    </ScrollView>
   </View>
 );
 
