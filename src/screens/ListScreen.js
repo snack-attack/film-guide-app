@@ -27,7 +27,7 @@ class ListScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  films: state.collection
+  films: state.films.collection
 });
 
 export default connect(mapStateToProps)(ListScreen);

@@ -1,11 +1,15 @@
 import React from 'react';
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 
 import Navigator from './src/navigator';
 import filmsReducer from './src/store/films';
 
-const store = createStore(filmsReducer);
+const reducers = combineReducers({
+  films: filmsReducer
+});
+
+const store = createStore(reducers);
 
 const App = () => (
   <Provider store={store}>
