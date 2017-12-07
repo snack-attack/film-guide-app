@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import films from '../data/films.json';
 import FilmList from '../components/FilmList';
 
-export default class ListScreen extends Component {
+class ListScreen extends Component {
   static navigationOptions = {
     title: 'Films on Freeview'
   };
@@ -21,8 +21,13 @@ export default class ListScreen extends Component {
   }
 
   render() {
-    return (
-      <FilmList films={films} onFilmSelected={this.navigateToDetailScreen} />
-    );
+    const { films } = this.props;
+    return <FilmList films={films} onFilmSelected={this.navigateToDetailScreen} />;
   }
 }
+
+const mapStateToProps = state => ({
+  films: state.collection
+});
+
+export default connect(mapStateToProps)(ListScreen);
