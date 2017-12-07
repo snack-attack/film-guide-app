@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Linking, Text } from 'react-native';
+import { Linking } from 'react-native';
 import FilmDetail from '../components/FilmDetail';
 import NavIconButton from '../components/nav/NavIconButton';
+import OpenInBrowserIcon from '../components/nav/OpenInBrowserIcon';
 
 export default class DetailScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -11,7 +12,7 @@ export default class DetailScreen extends Component {
       title: name,
       headerRight: (
         <NavIconButton onPress={openFilmUrl}>
-          <Text>O</Text>
+          <OpenInBrowserIcon />
         </NavIconButton>
       )
     };
