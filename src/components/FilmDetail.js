@@ -12,8 +12,8 @@ const FilmDetail = ({ film }) => (
     </View>
     <View style={styles.showtimesContainer}>
       <Text style={styles.showtimesHeader}>Showtimes:</Text>
-      {film.showtimes.map(showtime => (
-        <Text style={styles.showtime}>
+      {film.showtimes.map((showtime, idx) => (
+        <Text style={styles.showtime} key={idx}>
           {showtime.startsAtDate} at {showtime.startsAtTime} on {showtime.channel}
         </Text>
       ))}
