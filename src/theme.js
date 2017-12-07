@@ -17,7 +17,8 @@ const colors = {
 };
 
 const dimensions = {
-  basePadding: 12
+  basePadding: 12,
+  navbarHeight: platform.isAndroid ? 56 : 44
 };
 
 const fontSizes = {
