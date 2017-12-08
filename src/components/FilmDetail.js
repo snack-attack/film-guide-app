@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Image } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import Image from 'react-native-image-progress';
 import { dimensions, fontSizes, lineHeights, colors } from '../theme';
 
 const GUTTER = dimensions.basePadding / 2;
@@ -47,7 +48,6 @@ const styles = StyleSheet.create({
   },
   image: {
     aspectRatio: 0.75,
-    resizeMode: 'cover',
     paddingBottom: GUTTER
   },
   statsContainer: {
