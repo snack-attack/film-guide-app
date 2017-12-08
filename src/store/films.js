@@ -56,7 +56,7 @@ function toShowtimeMoment(date, time) {
 const getFilmsSelector = state => {
   const now = moment();
 
-  const films = [];
+  let films = [];
 
   state.films.collection.forEach(film => {
     let showtimes = [];
@@ -75,8 +75,24 @@ const getFilmsSelector = state => {
 
     if (showtimes.length) {
       film.showtimes = showtimes;
+      film.nextShowtime = showtimes[0];
       films.push(film);
     }
+  });
+
+  films = films.sort((first, second) => {
+    const firstStartsAtMoment = first.nextShowtime.startsAtMoment;
+    const secondStartsAtMoment = second.nextShowtime.startsAtMoment;
+
+    if (firstStartsAtMoment.isBefore(secondStartsAtMoment)) {
+      return -1;
+    }
+
+    if (firstStartsAtMoment.isAfter(secondStartsAtMoment)) {
+      return 1;
+    }
+
+    return 0;
   });
 
   return films;
