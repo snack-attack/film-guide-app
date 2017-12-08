@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Platform } from 'react-native';
+import Icon from '@expo/vector-icons/Ionicons';
 
 const isIOS = Platform.OS === 'ios';
 
@@ -12,7 +13,7 @@ const FilmListItem = ({ film }) => (
       </Text>
     </View>
     {!!film.tmdbRating && <Text style={styles.rating}>{film.tmdbRating}%</Text>}
-    {isIOS && <Text style={styles.accessory}>{'>'}</Text>}
+    {isIOS && <Icon style={styles.accessory} name="ios-arrow-forward" />}
   </View>
 );
 
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
   showtime: {
     fontSize: 14,
     paddingTop: 3,
-    color: '#666'
+    color: '#555'
   },
   rating: {
     fontSize: 16,
@@ -44,6 +45,7 @@ const styles = StyleSheet.create({
     paddingLeft: 12,
     fontSize: 16,
     color: '#c0c0c0',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    paddingTop: 2
   }
 });
