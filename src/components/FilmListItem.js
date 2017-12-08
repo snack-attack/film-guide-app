@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableHighlight, StyleSheet, Platform } from 'react-native';
 import Icon from '@expo/vector-icons/Ionicons';
+import debounce from 'lodash.debounce';
 import { colors, dimensions, fontSizes } from '../theme';
 import FilmRating from './FilmRating';
 import FilmShowtime from './FilmShowtime';
@@ -11,7 +12,7 @@ class FilmListItem extends Component {
   constructor() {
     super();
 
-    this.handlePress = this.handlePress.bind(this);
+    this.handlePress = debounce(this.handlePress.bind(this), 500, { leading: true, trailing: false });
   }
 
   handlePress() {

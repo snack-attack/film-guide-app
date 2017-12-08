@@ -26,6 +26,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "expo": "^23.0.4",
+    "lodash.debounce": "^4.0.8",
     "moment": "^2.19.3",
     "react": "16.0.0",
     "react-native": "0.50.3",
