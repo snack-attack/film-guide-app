@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import Image from 'react-native-image-progress';
 import { dimensions, fontSizes, lineHeights, colors } from '../theme';
+import FilmRating from './FilmRating';
 import FilmShowtime from './FilmShowtime';
 
 const GUTTER = dimensions.basePadding / 2;
@@ -20,7 +21,11 @@ const FilmDetail = ({ film }) => (
       <View style={styles.textContainer}>
         <View style={styles.statsContainer}>
           {!!film.year && <Text style={styles.stats}>Released in {film.year}</Text>}
-          {!!film.tmdbRating && <Text style={styles.stats}>Rating: {film.tmdbRating}%</Text>}
+          {!!film.tmdbRating && (
+            <Text style={styles.stats}>
+              Rating: <FilmRating rating={film.tmdbRating} />
+            </Text>
+          )}
         </View>
         <View style={styles.showtimesContainer}>
           <Text style={styles.showtimesHeader}>Showtimes:</Text>

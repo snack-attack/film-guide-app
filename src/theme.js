@@ -8,6 +8,12 @@ const platform = {
 const colors = {
   primary: '#68aa63',
 
+  rating: {
+    good: '#265819',
+    average: '#71500f',
+    poor: '#7e2310'
+  },
+
   // http://chir.ag/projects/name-that-color/
   white: '#fff',
   concrete: '#f2f2f2',

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableHighlight, StyleSheet, Platform } from 'react-native';
 import Icon from '@expo/vector-icons/Ionicons';
 import { colors, dimensions, fontSizes } from '../theme';
+import FilmRating from './FilmRating';
 import FilmShowtime from './FilmShowtime';
 
 const isIOS = Platform.OS === 'ios';
@@ -39,7 +40,7 @@ class FilmListItem extends Component {
               ellipsizeMode={'tail'}
             />
           </View>
-          {!!film.tmdbRating && <Text style={styles.rating}>{film.tmdbRating}%</Text>}
+          {!!film.tmdbRating && <FilmRating style={styles.rating} rating={film.tmdbRating} />}
           {isIOS && <Icon style={styles.accessory} name="ios-arrow-forward" />}
         </View>
       </TouchableHighlight>
