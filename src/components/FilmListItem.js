@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableHighlight, StyleSheet, Platform } from 'react-native';
 import Icon from '@expo/vector-icons/Ionicons';
+import moment from 'moment';
 import { colors, dimensions, fontSizes } from '../theme';
 
 const isIOS = Platform.OS === 'ios';
@@ -23,6 +24,10 @@ class FilmListItem extends Component {
 
   render() {
     const { film } = this.props;
+    const nextShowtime = film.showtimes[0];
+    const nextShowtimeMoment = moment(`${nextShowtime.startsAtDate} ${nextShowtime.startsAtTime}`, 'YYYY-MM-DD HH:mm');
+    const nextShowtimeCalendar = nextShowtimeMoment.calendar();
+
     return (
       <TouchableHighlight underlayColor={colors.dove} onPress={this.handlePress}>
         <View style={styles.container}>
@@ -31,7 +36,7 @@ class FilmListItem extends Component {
               {film.name}
             </Text>
             <Text style={styles.showtime} numberOfLines={1} ellipsizeMode={'tail'}>
-              {film.showtimes[0].startsAtDate} at {film.showtimes[0].startsAtTime} on {film.showtimes[0].channel}
+              {nextShowtimeCalendar} on {film.showtimes[0].channel}
             </Text>
           </View>
           {!!film.tmdbRating && <Text style={styles.rating}>{film.tmdbRating}%</Text>}
