@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import Image from 'react-native-image-progress';
 import { dimensions, fontSizes, lineHeights, colors } from '../theme';
+import FilmShowtime from './FilmShowtime';
 
 const GUTTER = dimensions.basePadding / 2;
 
@@ -24,9 +25,7 @@ const FilmDetail = ({ film }) => (
         <View style={styles.showtimesContainer}>
           <Text style={styles.showtimesHeader}>Showtimes:</Text>
           {film.showtimes.map((showtime, idx) => (
-            <Text style={styles.showtime} key={idx}>
-              {showtime.startsAtDate} at {showtime.startsAtTime} on {showtime.channel}
-            </Text>
+            <FilmShowtime showtime={showtime} style={styles.showtime} key={idx} />
           ))}
         </View>
         <View style={styles.separator} />
