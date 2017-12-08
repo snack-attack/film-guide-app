@@ -1,9 +1,8 @@
 import React from 'react';
 import { Text } from 'react-native';
-import moment from 'moment';
 
 function getShowtimeText(showtime) {
-  return moment(`${showtime.startsAtDate} ${showtime.startsAtTime}`, 'YYYY-MM-DD HH:mm').calendar();
+  return showtime.startsAtMoment.calendar();
 }
 
 const FilmShowtime = ({ showtime, ...otherProps }) => (
