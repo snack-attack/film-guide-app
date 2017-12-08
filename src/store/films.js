@@ -49,38 +49,52 @@ function reducer(state = initialState, action) {
   }
 }
 
+const getFilmsSelector = state => {
+  const now = moment();
+  const films = state.films.collection;
+  return filterFilmsAfter(now, films);
+};
+
+const getFilmsFetchingSelector = state => state.films.isFetching;
+
+export default reducer;
+
+export { actionCreators, getFilmsSelector, getFilmsFetchingSelector };
+
 function toShowtimeMoment(date, time) {
   return moment(`${date} ${time}`, 'YYYY-MM-DD HH:mm');
 }
 
-const getFilmsSelector = state => {
-  const now = moment();
+function filterFilmsAfter(date, films) {
+  return films.reduce(filmReducer, []).sort(filmSorter);
 
-  let films = [];
-
-  state.films.collection.forEach(film => {
-    let showtimes = [];
-
-    film.showtimes.forEach(showtime => {
-      const startsAtMoment = toShowtimeMoment(showtime.startsAtDate, showtime.startsAtTime);
-      const endsAtMoment = toShowtimeMoment(showtime.endsAtDate, showtime.endsAtTime);
-      if (startsAtMoment.isAfter(now)) {
-        showtimes.push({
-          ...showtime,
-          startsAtMoment,
-          endsAtMoment
-        });
-      }
-    });
-
+  function filmReducer(films, film) {
+    const showtimes = film.showtimes.reduce(showtimeReducer, []);
     if (showtimes.length) {
-      film.showtimes = showtimes;
-      film.nextShowtime = showtimes[0];
-      films.push(film);
+      films.push({
+        ...film,
+        showtimes,
+        nextShowtime: showtimes[0]
+      });
     }
-  });
+    return films;
+  }
 
-  films = films.sort((first, second) => {
+  function showtimeReducer(showtimes, showtime) {
+    // Only show films which are starting in the future.
+    const startsAtMoment = toShowtimeMoment(showtime.startsAtDate, showtime.startsAtTime);
+    const endsAtMoment = toShowtimeMoment(showtime.endsAtDate, showtime.endsAtTime);
+    if (startsAtMoment.isAfter(date)) {
+      showtimes.push({
+        ...showtime,
+        startsAtMoment,
+        endsAtMoment
+      });
+    }
+    return showtimes;
+  }
+
+  function filmSorter(first, second) {
     const firstStartsAtMoment = first.nextShowtime.startsAtMoment;
     const secondStartsAtMoment = second.nextShowtime.startsAtMoment;
 
@@ -93,13 +107,5 @@ const getFilmsSelector = state => {
     }
 
     return 0;
-  });
-
-  return films;
-};
-
-const getFilmsFetchingSelector = state => state.films.isFetching;
-
-export default reducer;
-
-export { actionCreators, getFilmsSelector, getFilmsFetchingSelector };
+  }
+}
