@@ -7,8 +7,10 @@ const isIOS = Platform.OS === 'ios';
 const FilmListItem = ({ film }) => (
   <View style={styles.container}>
     <View style={styles.titleContainer}>
-      <Text style={styles.title}>{film.name}</Text>
-      <Text style={styles.showtime}>
+      <Text style={styles.title} numberOfLines={1} ellipsizeMode={'tail'}>
+        {film.name}
+      </Text>
+      <Text style={styles.showtime} numberOfLines={1} ellipsizeMode={'tail'}>
         {film.showtimes[0].startsAtDate} at {film.showtimes[0].startsAtTime} on {film.showtimes[0].channel}
       </Text>
     </View>
