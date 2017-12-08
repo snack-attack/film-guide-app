@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getFilmsSelector, getFilmsFetchingSelector } from '../store/films';
+import { getFilmsSelector, getFilmsFetchingSelector, actionCreators } from '../store/films';
 import FilmList from '../components/FilmList';
 import FilmsLoading from '../components/FilmsLoading';
 
@@ -23,12 +23,22 @@ class ListScreen extends Component {
   }
 
   render() {
-    const { films, isFetching } = this.props;
-    if (isFetching) {
+    const { films, isFetching, refresh } = this.props;
+    const loading = !!(isFetching && !films.length);
+    const refreshing = !!(isFetching && films.length);
+
+    if (loading) {
       return <FilmsLoading />;
     }
 
-    return <FilmList films={films} onFilmSelected={this.navigateToDetailScreen} />;
+    return (
+      <FilmList
+        films={films}
+        onFilmSelected={this.navigateToDetailScreen}
+        onRefresh={refresh}
+        refreshing={refreshing}
+      />
+    );
   }
 }
 
@@ -37,4 +47,8 @@ const mapStateToProps = state => ({
   isFetching: getFilmsFetchingSelector(state)
 });
 
-export default connect(mapStateToProps)(ListScreen);
+const mapDispatchToProps = dispatch => ({
+  refresh: () => dispatch(actionCreators.fetchFilms())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListScreen);

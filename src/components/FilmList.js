@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList, RefreshControl, StyleSheet } from 'react-native';
 
 import FilmListItem from './FilmListItem';
 import FilmListItemSeparator from './FilmListItemSeparator';
@@ -21,7 +21,7 @@ export default class FilmList extends Component {
   }
 
   render() {
-    const { films } = this.props;
+    const { films, refreshing, onRefresh } = this.props;
     return (
       <View style={styles.container}>
         <FlatList
@@ -29,6 +29,7 @@ export default class FilmList extends Component {
           renderItem={this.renderItem}
           keyExtractor={this.keyExtractor}
           ItemSeparatorComponent={FilmListItemSeparator}
+          refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
         />
       </View>
     );
