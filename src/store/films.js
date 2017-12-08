@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { getAllFilms } from '../data/api';
 
 const types = {
@@ -48,7 +49,39 @@ function reducer(state = initialState, action) {
   }
 }
 
-const getFilmsSelector = state => state.films.collection;
+function toShowtimeMoment(date, time) {
+  return moment(`${date} ${time}`, 'YYYY-MM-DD HH:mm');
+}
+
+const getFilmsSelector = state => {
+  const now = moment();
+
+  const films = [];
+
+  state.films.collection.forEach(film => {
+    let showtimes = [];
+
+    film.showtimes.forEach(showtime => {
+      const startsAtMoment = toShowtimeMoment(showtime.startsAtDate, showtime.startsAtTime);
+      const endsAtMoment = toShowtimeMoment(showtime.endsAtDate, showtime.endsAtTime);
+      if (startsAtMoment.isAfter(now)) {
+        showtimes.push({
+          ...showtime,
+          startsAtMoment,
+          endsAtMoment
+        });
+      }
+    });
+
+    if (showtimes.length) {
+      film.showtimes = showtimes;
+      films.push(film);
+    }
+  });
+
+  return films;
+};
+
 const getFilmsFetchingSelector = state => state.films.isFetching;
 
 export default reducer;
