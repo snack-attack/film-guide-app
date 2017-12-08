@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getFilmsSelector, getFilmsFetchingSelector, actionCreators } from '../store/films';
+import { getFilmsGroupedByDaySelector, getFilmsFetchingSelector, actionCreators } from '../store/films';
 import FilmList from '../components/FilmList';
 import FilmsLoading from '../components/FilmsLoading';
 
@@ -43,7 +43,7 @@ class ListScreen extends Component {
 }
 
 const mapStateToProps = state => ({
-  films: getFilmsSelector(state),
+  films: getFilmsGroupedByDaySelector(state),
   isFetching: getFilmsFetchingSelector(state)
 });
 

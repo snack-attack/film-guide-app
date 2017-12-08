@@ -55,11 +55,48 @@ const getFilmsSelector = state => {
   return filterFilmsAfter(now, films);
 };
 
+const getFilmsGroupedByDaySelector = state => {
+  const now = Date.now();
+
+  const today = moment(now).startOf('day');
+  const tomorrow = today.clone().add(1, 'day');
+
+  const asDayOfWeek = dateStr => {
+    const dateMoment = moment(dateStr, 'YYYY-MM-DD').startOf('day');
+    if (dateMoment.isSame(today)) {
+      return 'Today';
+    }
+    if (dateMoment.isSame(tomorrow)) {
+      return 'Tomorrow';
+    }
+
+    return dateMoment.format('dddd');
+  };
+
+  const films = getFilmsSelector(state);
+
+  // Group the films by the next start date
+  const filmsGrouped = films.reduce((filmsGroup, film) => {
+    const startsAtDate = film.nextShowtime.startsAtDate;
+    if (!filmsGroup[startsAtDate]) {
+      filmsGroup[startsAtDate] = [];
+    }
+    filmsGroup[startsAtDate].push(film);
+    return filmsGroup;
+  }, {});
+
+  // Order the dates and map into what we are looking for
+  return Object.keys(filmsGrouped).map(startsAtDate => ({
+    day: asDayOfWeek(startsAtDate),
+    data: filmsGrouped[startsAtDate]
+  }));
+};
+
 const getFilmsFetchingSelector = state => state.films.isFetching;
 
 export default reducer;
 
-export { actionCreators, getFilmsSelector, getFilmsFetchingSelector };
+export { actionCreators, getFilmsSelector, getFilmsFetchingSelector, getFilmsGroupedByDaySelector };
 
 function toShowtimeMoment(date, time) {
   return moment(`${date} ${time}`, 'YYYY-MM-DD HH:mm');

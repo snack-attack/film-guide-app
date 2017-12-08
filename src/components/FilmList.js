@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, FlatList, RefreshControl, StyleSheet } from 'react-native';
+import { View, SectionList, RefreshControl, StyleSheet } from 'react-native';
 
 import FilmListItem from './FilmListItem';
+import FilmListItemHeader from './FilmListItemHeader';
 import FilmListItemSeparator from './FilmListItemSeparator';
 
 export default class FilmList extends Component {
@@ -9,6 +10,7 @@ export default class FilmList extends Component {
     super();
 
     this.renderItem = this.renderItem.bind(this);
+    this.renderSectionHeader = this.renderSectionHeader.bind(this);
   }
 
   keyExtractor(item) {
@@ -20,13 +22,18 @@ export default class FilmList extends Component {
     return <FilmListItem film={item} onFilmSelected={onFilmSelected} />;
   }
 
+  renderSectionHeader({ section }) {
+    return <FilmListItemHeader day={section.day} />;
+  }
+
   render() {
     const { films, refreshing, onRefresh } = this.props;
     return (
       <View style={styles.container}>
-        <FlatList
-          data={films}
+        <SectionList
+          sections={films}
           renderItem={this.renderItem}
+          renderSectionHeader={this.renderSectionHeader}
           keyExtractor={this.keyExtractor}
           ItemSeparatorComponent={FilmListItemSeparator}
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
