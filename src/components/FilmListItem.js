@@ -17,6 +17,10 @@ class FilmListItem extends Component {
     onFilmSelected(film);
   }
 
+  shouldComponentUpdate(nextProps) {
+    return nextProps.film !== this.props.film;
+  }
+
   render() {
     const { film } = this.props;
     return (
