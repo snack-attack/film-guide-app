@@ -74,11 +74,6 @@ Shaking the device will reveal the Developer Menu, where you can manually reload
 the component tree. Enabling remote JS debugging will open Google Chrome where you can step through your code and set
 breakpoints.
 
-## Extras
-
-This branch showcases the initial version of the app. More advanced concepts can be found in the
-[extras](/../../tree/extras) branch, where the app has been developed further.
-
 ## License
 
 MIT
